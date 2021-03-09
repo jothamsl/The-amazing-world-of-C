@@ -26,6 +26,4 @@ int main(void)
    
     float g = 4.3;         // Float  
     double j = 4.325;      // Double 
-    printf("%c %c %c \n", d, e, f);
-
 }
