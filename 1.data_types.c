@@ -6,17 +6,26 @@ int main(void)
     // The "unsigned" keyword pushes value range from 0 to max
 
     // Int
+    // These are simple digit values*/
+
     int a = 21;            // Integer values from −32,768 to 32,767
     signed int b = 249;    // Signed Integer values from −32,768 to 32,767
     unsigned int c = 4902; // Unsigned Integer values from 0 to 65,535
     
-    // Char
-    char d = 95;           // Char values from −128 to 127
-    signed char e = 'f';   // Signed Char values from -128 to 127
+    // Char 
+    // Uses ascii chart for number to letter e.g 90 -> Z
+    // Can be used for specific character values uses literal
+   
+    char d = 85;           // Char values from −128 to 127
+    signed char e = 'A';   // Signed Char values from -128 to 127
     unsigned char f = 'g'; // Unsigned Char values from 0 to 255
 
-    // Float (There are no signed and unsigned forms of float and double)
+    // Floats & double 
+    // These are irrational numbers
+    // There are no signed and unsigned forms of float and double
+   
     float g = 4.3;         // Float  
-    double c = 4.325;      // Double 
+    double j = 4.325;      // Double 
+    printf("%c %c %c \n", d, e, f);
 
 }
