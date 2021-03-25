@@ -23,7 +23,7 @@ int main(void)
     char x[] = "abc";
     char y[8];
 
-    strcpy(y, x); // think "y special equals a"
+    strcpy(y, x); // think "y special equals x"
     printf("%s\n", y); // "abc" will be printed
 
     return 0;

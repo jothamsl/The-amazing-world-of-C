@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 /* C of all versions, will effectively treat any value other than 0 as true
 * for comparison operators and the integer value 0 as false. If you don't 
@@ -12,7 +13,6 @@
 int main(void)
 {
 
-#include <stdbool.h> // Using this header file allow you to use 'bool' as a
     bool x = true; // equivalent to x = 1
     bool y = false; // equivalent to y = 0
 
