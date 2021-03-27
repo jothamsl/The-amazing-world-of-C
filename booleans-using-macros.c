@@ -2,18 +2,19 @@
 #include <stdbool.h>
 
 /* C of all versions, will effectively treat any value other than 0 as true
-* for comparison operators and the integer value 0 as false. If you don't 
-* have '_Bool' or 'bool', you could simulate a Boolean data type in C using
-* '#define' macros.*/ 
+ for comparison operators and the integer value 0 as false. If you don't 
+ have '_Bool' or 'bool', you could simulate a Boolean data type in C using
+ '#define' macros.
+ */
 
-#define bool int 
-#define true 1 
+#define bool int
+#define true 1
 #define false 0
 
 int main(void)
 {
 
-    bool x = true; // equivalent to x = 1
+    bool x = true;  // equivalent to x = 1
     bool y = false; // equivalent to y = 0
 
     if (x) // Functionally equivalent to if (x != 0) or if (x != false)
