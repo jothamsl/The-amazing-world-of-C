@@ -25,5 +25,7 @@ int main(void)
     // There are no signed and unsigned forms of float and double
    
     float g = 4.3;         // Float  
-    double j = 4.325;      // Double 
+    double h = 4.325;      // Double 
+    long i = 1;            // long are often 4 to 8 bytes
+    long long j = 0;       // Guaranteed to be at least 8 bytes
 }
