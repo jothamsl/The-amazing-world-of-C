@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(void)
-{
+int main(void) {
     /* Strings are one-dimensional arrays of characters and is terminated by
        a null-character '\0'
 
@@ -32,8 +31,9 @@ int main(void)
     modifiable_string[0] = 'L'; // Re-assigning works
     printf("%s\n", modifiable_string);
 
-    char modifiable_string2[] = {'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd', '\0'};
-    printf("%s\n", modifiable_string2); //This is the same as modifiable_string
+    char modifiable_string2[] = {'H', 'e', 'l', 'l', 'o', ' ',
+        'w', 'o', 'r', 'l', 'd', '\0'};
+    printf("%s\n", modifiable_string2); // This is the same as modifiable_string
 
     // Tokenizing individual worlds using delimeters
     int toknum = 0;
@@ -44,10 +44,8 @@ int main(void)
        using a set of delimeters
        */
     char *token = strtok(src, delimeters);
-    while (token != NULL)
-    {
+    while (token != NULL) {
         printf("%d: [%s]\n", ++toknum, token);
         token = strtok(NULL, delimeters);
     }
-
 }
