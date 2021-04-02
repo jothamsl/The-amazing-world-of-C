@@ -15,7 +15,7 @@ int main(void) {
     printf("%s\n", string);
 
     /* When initializing a 'char *' to a string literal, the string itself is
-     * usually allocated in read only data; the string is actually a ponter
+     * usually allocated in read only data; the string is actually a pointer
      * to the first element of the array, which is 'H'.
      *
      * e.g string[0] = 'L'; Returns segmentation fault
