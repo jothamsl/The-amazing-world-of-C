@@ -29,6 +29,9 @@ int main(void)
        integral constants and each integral constant is given a
        name. The keyword 'enum' is used to define enumerated data
        types
+
+       It allows you to define a type that assigns names to integer
+       values in cases with an enumerable set of constant values
        */
 
     enum color chosenColor;
