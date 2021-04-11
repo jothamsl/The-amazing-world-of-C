@@ -3,7 +3,8 @@
 int main(void) 
 {
     // Basic C data types
-    // The "unsigned" keyword pushes value range from 0 to max
+    // The "unsigned" keyword pushes value range from 0 to max rather than 
+    // -x to y (x and y are just range values)
 
     // Int
     // These are simple digit values*/
