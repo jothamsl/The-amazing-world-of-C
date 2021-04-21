@@ -120,18 +120,20 @@ int list_length(List l)
     return c;
 }
 
-int main(void)
+Node *search_list(int d, List *l)
 {
-    List *linked_list = initialize_list();
-    Node n1;
-    Node n2;
-
-    n1.data = 4;
-    n2.data = 3;
-    n1.next = NULL;
-    n2.next = NULL;
-
-    linked_list->head->next = &n1;
-    n1.next = &n2;
-
+	Node *next;
+	Node *current = l->head;
+	while (current)
+	{
+        next = current->next;
+		if (current->data == d)
+		{
+			return current;
+		}
+        current = next;
+	}
+    printf("Could not locate Node with value %d\n", d);
+	return NULL;
 }
+
