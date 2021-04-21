@@ -91,7 +91,7 @@ List pop_list(List *l)
         l->head = NULL;
         return *l;
     }
-    
+
     Node *next;
     Node *prev;
     Node *current = l->head;
@@ -113,7 +113,8 @@ int list_length(List l)
 {
     int c = 0;
     Node *n = l.head;
-    while (n) {
+    while (n)
+    {
         n = n->next;
         c++;
     }
@@ -122,18 +123,17 @@ int list_length(List l)
 
 Node *search_list(int d, List *l)
 {
-	Node *next;
-	Node *current = l->head;
-	while (current)
-	{
+    Node *next;
+    Node *current = l->head;
+    while (current)
+    {
         next = current->next;
-		if (current->data == d)
-		{
-			return current;
-		}
+        if (current->data == d)
+        {
+            return current;
+        }
         current = next;
-	}
+    }
     printf("Could not locate Node with value %d\n", d);
-	return NULL;
+    return NULL;
 }
-
