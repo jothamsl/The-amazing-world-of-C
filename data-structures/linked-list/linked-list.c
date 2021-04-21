@@ -1,154 +1,137 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// TODO: Work on secure linked list, with hash function
-
 struct Node
 {
-   int data;
-   struct Node *next;
-   struct Node *prev;
+    int data;
+    struct Node *next;
 };
+typedef struct Node Node;
 
-typedef struct
+struct List
 {
-   struct Node *head;
-} linked_list;
+    Node *head;
+};
+typedef struct List List;
 
-/* Create New linked list */
-linked_list *create_list();
+List *initialize_list()
+{
+    Node *node = (Node *) malloc(sizeof(Node));
+    List *linked_list = (List *) malloc(sizeof(List));
+    if (linked_list)
+    {
+        node->data = 0;
+        node->next = NULL;
+    }
 
-/* Destroy linked list */
-void destroy_list(linked_list *link);
+    linked_list->head = node;
+    return linked_list;
+}
 
-/* Push new Node to beginning of list*/
-linked_list push_node(linked_list *link, int data);
+void destroy_list(List *l)
+{
+    if (!l->head->next)
+    {
+        free(l->head);
+        free(l);
+        return;
+    }
 
-/* Append new Node to end of list */
-linked_list append_node(linked_list *link, int data); // TODO
+    Node *next;
+    Node *current = l->head;
+    while (current)
+    {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+    free(l);
+}
 
-/* Pop Node from end of list */
-linked_list pop_node(linked_list *link);              // TODO
+List push_list(Node n, List *l)
+{
+    Node *temp = l->head;
+    l->head = &n;
+    l->head->next = temp;
+    return *l;
+}
 
-/* Shift (remove) Node from beginning of list */
-linked_list shift_node(linked_list *link);            // TODO
+List append_list(Node n, List *l)
+{
+    Node *next;
+    Node *current = l->head;
+    while (current)
+    {
+        next = current->next;
+        if (!current->next)
+        {
+            current->next = &n;
+            return *l;
+        }
+        current = next;
+    }
+    return *l;
+}
 
-/* Counts amount of Nodes in linked list */
-void link_counter(struct Node *Head, int *counter); //   TODO
+List shift_list(List *l)
+{
+    if (!l->head->next)
+    {
+        l->head = NULL;
+        return *l;
+    }
+    l->head = l->head->next;
+    return *l;
+}
 
-/* Print out linked list nodes and their data */
-void print_linked(linked_list link); //                  TODO
+List pop_list(List *l)
+{
+    if (!l->head->next)
+    {
+        l->head = NULL;
+        return *l;
+    }
+    
+    Node *next;
+    Node *prev;
+    Node *current = l->head;
+    while (current)
+    {
+        next = current->next;
+        if (!current->next)
+        {
+            prev->next = NULL;
+            return *l;
+        }
+        prev = current;
+        current = next;
+    }
+    return *l;
+}
+
+int list_length(List l)
+{
+    int c = 0;
+    Node *n = l.head;
+    while (n) {
+        n = n->next;
+        c++;
+    }
+    return c;
+}
 
 int main(void)
 {
-   struct Node n1;
-   struct Node n2;
-   struct Node n3;
+    List *linked_list = initialize_list();
+    Node n1;
+    Node n2;
 
-   linked_list *LL = create_list();
-   LL->head->data = 5;
-   LL->head->next = &n1;
-   n1.next = &n2;
-   n2.next = &n3;
-   n1.data = 23;
-   n2.data = 52;
-   n3.data = 053;
+    n1.data = 4;
+    n2.data = 3;
+    n1.next = NULL;
+    n2.next = NULL;
 
+    linked_list->head->next = &n1;
+    n1.next = &n2;
 
-
-   // TODO: Work on printing out linked list
-   /* print_linked(*LL); */
-}
-
-linked_list *create_list()
-{
-   /* Allocate memory for new linked_list*/
-   linked_list *list = (linked_list *) malloc(sizeof(linked_list));
-
-   /* Create Head Node */
-   struct Node Head;
-   Head.next = NULL;
-   Head.prev = NULL;
-
-   /* Make Head argument head of the linked_list */
-   list->head = &Head;
-
-   /* Initialize Head's next node to NULL */
-   return list;
-}
-
-void destroy_list(linked_list *link)
-{
-
-   /* 
-    * If head of the linked list has no successor, just free it
-    * and the list 
-    */
-   if (link->head->next == NULL)
-   {
-      free(link->head);
-      free(link);
-      return;
-   }
-
-   // To store current Node considered
-   struct Node *current_node = link->head;
-   // To store next node of current Node
-   struct Node *next_node;
-
-   while (current_node->next != NULL)
-   {
-      next_node = current_node->next;
-      free(current_node);
-      current_node = next_node;
-   }
-   free(link);
-}
-
-linked_list push_node(linked_list *link, int data)
-{
-   /* Allocate memory for new Node */
-   struct Node *new_node = (struct Node *) malloc(sizeof(struct Node));
-   new_node->next = NULL;
-   new_node->prev = NULL;
-
-   /* Assign data value for new Node */
-   new_node->data = data;
-
-   /* Temporarily store current Head Node */
-   struct Node current_head = *link->head;
-
-   /*
-    * Change current head Node to new Node and succeeding
-    * Node after new Node to current_head vice versa
-    */
-   link->head = new_node;
-   link->head->next = &current_head;
-   current_head.prev = new_node;
-
-   return *link;
-}
-
-void link_counter(struct Node *current_node, int *counter)
-{
-   if (current_node->next == NULL)
-      return ;
-   else
-   {
-      counter++;
-      link_counter(current_node->next, counter);
-   }
-}
-
-
-void print_linked(linked_list link)
-{
-   /* Count number of nodes in linked list */
-   int counter = 0;
-   link_counter(link.head, &counter);
-   printf("%d\n", counter);
-
-   //if (link.head->next != NULL)
-   //{
-   //}
 }
