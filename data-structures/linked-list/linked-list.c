@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 struct Node
 {
     int data;
-    char *id;
     struct Node *next;
 };
 typedef struct Node Node;
@@ -50,14 +48,15 @@ void destroy_list(List *l)
     free(l);
 }
 
-void push_list(Node n, List *l)
+List push_list(Node n, List *l)
 {
     Node *temp = l->head;
     l->head = &n;
     l->head->next = temp;
+    return *l;
 }
 
-void append_list(Node n, List *l)
+List append_list(Node n, List *l)
 {
     Node *next;
     Node *current = l->head;
@@ -67,28 +66,30 @@ void append_list(Node n, List *l)
         if (!current->next)
         {
             current->next = &n;
-            return ;
+            return *l;
         }
         current = next;
     }
+    return *l;
 }
 
-void shift_list(List *l)
+List shift_list(List *l)
 {
     if (!l->head->next)
     {
         l->head = NULL;
-        return ;
+        return *l;
     }
     l->head = l->head->next;
+    return *l;
 }
 
-void pop_list(List *l)
+List pop_list(List *l)
 {
     if (!l->head->next)
     {
         l->head = NULL;
-        return ;
+        return *l;
     }
 
     Node *next;
@@ -100,11 +101,12 @@ void pop_list(List *l)
         if (!current->next)
         {
             prev->next = NULL;
-            return ;
+            return *l;
         }
         prev = current;
         current = next;
     }
+    return *l;
 }
 
 int list_length(List l)
@@ -119,41 +121,19 @@ int list_length(List l)
     return c;
 }
 
-Node *search_list(char *s, List *l)
+Node *search_list(int d, List *l)
 {
     Node *next;
     Node *current = l->head;
     while (current)
     {
         next = current->next;
-        if (strcmp(current->id, s))
+        if (current->data == d)
         {
             return current;
         }
         current = next;
     }
-    printf("Could not locate Node with id %s\n", s);
+    printf("Could not locate Node with value %d\n", d);
     return NULL;
-}
-
-void remove_from_list(Node n, List *l)
-{
-   Node *s = search_list(n.id, l);
-   if (s)
-   {
-       Node *current = l->head;
-       Node *next;
-       Node *prev = NULL;
-
-       while (current)
-       {
-            next = current->next;
-            if (strcmp(current->id, n.id))
-            {
-                break;
-            }
-            prev = current;
-            current = next;
-       }
-   }
 }
