@@ -4,7 +4,7 @@
 #include <string.h>
 #include "hash_table.h"
 
-int hash_func(char *c)
+char hash_func(char *c)
 {
    return tolower(c[0]); 
 }
@@ -29,18 +29,30 @@ hash_table *new_ht()
 void ht_add(char * value, hash_table* table)
 {
     ht_item *item = new_ht_item(value);
-    table->items[table->current_size] = item;
-    table->current_size++;
+    table->items[table->current_size++] = item;
 }
 
-void ht_search(char *key)
+int ht_search(char *c, hash_table *table)
 {
-
+    char key = hash_func(c);
+    printf("Key: %c\n current_size: %i\n", key, table->current_size);
+    for (int i = 0; i < table->current_size; i++)
+    {
+        if (table->items[i]->key == key)
+        {
+            printf("%i\n", i);
+            return i;
+        }
+    }
+    return 0;
 }
 
-void ht_delete(char key, hash_table *table)
+void ht_delete(char *c, hash_table *table)
 {
-     
+    int index = ht_search(c, table); 
+    printf("%i\n", index);
+    table->items[index] = NULL;
+    table->current_size--;
 }
 
 void ht_destroy(hash_table *table)
@@ -117,7 +129,7 @@ int main(int argc, char *argv[])
         else if (argv[i][0] == 'D')
         {
           memmove(argv[i], argv[i]+1, strlen(argv[i]));
-          ht_delete();
+          ht_delete(argv[i], ht);
         }
         i++;
     }
