@@ -2,7 +2,7 @@ typedef struct ht_item ht_item;
 typedef struct hash_table hash_table;
 
 struct ht_item {
-    char key;
+    int key;
     char *value; 
 
 };
